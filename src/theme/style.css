@@ -1,0 +1,82 @@
+@import "./normalize.css";
+
+@font-face {
+  font-weight: 400;
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+
+  src: url("../../public/assets/fonts/inter/regular/Inter-Regular.woff2") format("woff2"),
+    url("../../public/assets/fonts/inter/regular/Inter-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+
+  src: url("../../public/assets/fonts/inter/medium/Inter-Medium.woff2") format("woff2"),
+    url("../../public/assets/fonts/inter/medium/Inter-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: "Inter";
+  font-style: normal;
+  font-display: swap;
+
+  src: url("../../public/assets/fonts/inter/semi-bold/Inter-SemiBold.woff2") format("woff2"),
+    url("../../public/assets/fonts/inter/semi-bold/Inter-SemiBold.woff") format("woff");
+}
+
+:root {
+  --background: #FFFFFF;
+  --main: #000000;
+  --white: #FFFFFF;
+  --border: #C3D1D5;
+  --footer: #FBFBFB;
+  --gradient: linear-gradient(101.56deg, #98FFE6 0%, #50EFF5 100%);
+
+  --text: #000000;
+  --text-white: #FFFFFF;
+  --text-gray: #8BA4AC;
+  --text-gray-60: #647982;
+  --text-red: #ff0000;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+img {
+  width: auto;
+  max-width: 100%;
+}
+
+.page-main {
+  padding-top: 80px;
+}
+
+.dropdown-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+}

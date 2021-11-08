@@ -1,0 +1,48 @@
+.container {}
+
+.container > div > h3 {
+  margin-bottom: 16px;
+}
+
+.container > div > button {
+  margin-top: 40px;
+}
+
+.confirmEmailIcon {
+  margin-bottom: 40px;
+}
+
+.confirmEmailIcon > svg {
+  display: block;
+
+  margin: 0 auto;
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email > a {
+  display: block;
+  margin-right: 8px;
+}
+
+.email > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .container {}
+
+  .container > div > h3 {
+    margin-bottom: 24px;
+  }
+
+  .confirmEmailIcon {
+    margin-bottom: 60px;
+  }
+}

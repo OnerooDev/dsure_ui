@@ -1,0 +1,176 @@
+.container {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  padding: 20px 0;
+
+  background-color: var(--white);
+}
+
+.burger {
+  display: block;
+
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.burger::before,
+.burger::after,
+.burger > span {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+
+  height: 3px;
+
+  background-color: var(--main);
+  border-radius: 10px;
+}
+
+.burger::before,
+.burger::after {
+  content: "";
+
+  transition: top 0.3s 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.burger::before {
+  top: 9px;
+}
+
+.burger::after {
+  top: 31px;
+}
+
+.burger > span {
+  display: block;
+
+  top: 20px;
+
+  transition: background 0.01s 0.2s ease-out;
+}
+
+.nav {
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 80px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  background-color: var(--background);
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+.item {
+  text-align: center;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 48px;
+}
+
+.link {
+  display: block;
+
+  padding: 4px 0;
+
+  border-bottom: 2px solid transparent;
+
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  text-decoration: none;
+
+  transition: 0.2s ease-in-out;
+}
+
+.link:hover,
+.link:focus {
+  border-color: var(--main);
+}
+
+.buttonProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0 auto;
+
+  background: var(--white);
+  border: 2px solid var(--main);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.containerOpened .nav {
+  display: flex;
+}
+
+.containerOpened .burger::before,
+.containerOpened .burger::after {
+  top: 20px;
+
+  transition: top 0.3s, transform 0.3s 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.containerOpened .burger::before {
+  transform: rotate(45deg);
+}
+
+.containerOpened .burger::after {
+  transform: rotate(-45deg);
+}
+
+.containerOpened .burger > span {
+  background: 0 0;
+}
+
+@media (min-width: 768px) {
+  .burger {
+    display: none;
+  }
+
+  .nav {
+    display: block;
+
+    position: static;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+  }
+
+  .item:not(:last-child) {
+    margin-right: 48px;
+    margin-bottom: 0;
+  }
+
+  .link {
+    font-size: 16px;
+    line-height: 150%;
+  }
+}

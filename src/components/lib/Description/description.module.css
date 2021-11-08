@@ -1,0 +1,36 @@
+.container {
+  margin: 0;
+
+  color: var(--text-gray-60);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 150%;
+}
+
+.container.mobileLarge {
+  font-size: 20px;
+}
+
+.container span,
+.container a {
+  color: var(--text);
+}
+
+.container a {
+  text-decoration: none;
+}
+
+.container a:hover {
+  text-decoration: underline;
+}
+
+.alignLeft {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .container:not(.desktopSmall) {
+    font-size: 20px;
+  }
+}

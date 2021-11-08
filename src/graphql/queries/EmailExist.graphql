@@ -1,0 +1,5 @@
+query EmailExist($eth_address: String!) {
+  emailExist(eth_address: $eth_address) {
+    ...RegularUser
+  }
+}

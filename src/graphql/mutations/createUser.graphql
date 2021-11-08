@@ -1,0 +1,6 @@
+mutation createUser($userPams: createUserInputs!) {
+  createUser(userPams: $userPams)
+  {
+    ...RegularUserResponse
+  }
+}

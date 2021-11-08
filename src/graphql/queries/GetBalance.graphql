@@ -1,0 +1,5 @@
+query GetTokenBalance($eth_address: String!) {
+  tokenBalance(eth_address: $eth_address) {
+    amount
+  }
+}

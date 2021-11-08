@@ -1,0 +1,16 @@
+.container {}
+
+.container > div:first-child {
+  margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+  }
+
+  .container > div:first-child {
+    margin-right: 24px;
+    margin-bottom: 0;
+  }
+}

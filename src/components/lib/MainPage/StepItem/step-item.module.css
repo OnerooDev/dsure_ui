@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  padding: 36px 30px 40px;
+
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  border-radius: 14px;
+}
+
+.container:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.icon {
+  margin-bottom: 32px;
+}
+
+.description {
+  margin: 0;
+
+  color: var(--text);
+  font-size: 20px;
+  line-height: 140%;
+}
+
+@media (min-width: 768px) {
+  .container:not(:last-child) {
+    margin-right: 24px;
+    margin-bottom: 0;
+  }
+
+  .description {
+    font-size: 24px;
+    line-height: 130%;
+  }
+}

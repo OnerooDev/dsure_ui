@@ -1,0 +1,7 @@
+fragment RegularUser on User {
+  id
+  eth_address
+  email
+  email_status
+  first_name
+}

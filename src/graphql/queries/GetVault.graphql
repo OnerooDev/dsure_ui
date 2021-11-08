@@ -1,0 +1,5 @@
+query GetVaults($eth_address: String!) {
+  vaultID(eth_address: $eth_address) {
+    id
+  }
+}

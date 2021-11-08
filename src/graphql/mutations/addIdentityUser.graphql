@@ -1,0 +1,6 @@
+mutation addIdentityUser($eth_address: String!, $userPams: IdentityUserInputs!) {
+  addIdentityUser(eth_address: $eth_address, userPams: $userPams)
+  {
+    ...RegularUserResponse
+  }
+}

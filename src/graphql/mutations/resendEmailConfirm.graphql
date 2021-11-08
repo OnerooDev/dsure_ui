@@ -1,0 +1,5 @@
+mutation resendEmailConfirm($eth_address: String!) {
+  resendEmailConfirm(eth_address: $eth_address){
+    ...RegularUser
+  }
+}
