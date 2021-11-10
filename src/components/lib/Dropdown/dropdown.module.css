@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  align-items: center;
+  margin-top: 2%;
+
+}
+
+.content {
+  position: relative;
+
+  width: 100%;
+  max-width: 500px;
+}
+
+.label {
+  display: block;
+
+  margin-right: 24px;
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 140%;
+  white-space: nowrap;
+}
+
+.trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 18px 20px;
+
+  background: var(--white);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 10px 32px rgba(0, 84, 111, 0.1);
+
+  transition: 0.2s ease-in-out;
+}
+
+.list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+
+  max-height: 250px;
+  padding: 0;
+  margin: 0;
+
+  background-color: var(--white);
+  box-shadow: 0 10px 32px rgba(0, 84, 111, 0.1);
+  border-radius: 8px;
+  overflow-y: auto;
+  list-style: none;
+
+  transition: 0.2s ease-in-out;
+}
+
+.itemWrapper:first-child > .item {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.itemWrapper:last-child > .item {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.item {
+  width: 100%;
+  padding: 18px 20px;
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  color: var(--text-gray);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 140%;
+  text-align: left;
+
+  transition: 0.2s ease-in-out;
+}
+
+.item:hover {
+  background-color: var(--main);
+
+  color: var(--text-white);
+}
+
+.container.containerOpened .trigger {
+  border-color: var(--main);
+}

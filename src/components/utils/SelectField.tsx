@@ -1,33 +1,17 @@
 import React, {InputHTMLAttributes} from 'react';
-import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import { Dropdown } from '../lib/Dropdown';
+import { IOption } from '../lib/Dropdown/Dropdown';
+import { Field } from 'formik';
 
 type SelectFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label: string;
-  list: Array<string>;
+  list: Array<IOption>;
 };
 
 export const SelectField: React.FC<SelectFieldProps> = ({ name, label, list }) => {
 
   return (
-    <FormControl
-      id={name}
-      isRequired
-    >
-      <FormLabel>{label}</FormLabel>
-      <Select
-        id={name}
-        placeholder="Select your country..."
-      >
-      {list.map((val, i) => {
-        return (
-          <option key={i} value={val}>
-            {val}
-          </option>
-        );
-      })}
-      </Select>
-    </FormControl>
-
+      <Dropdown label={label} options={list} name={name}/>
   );
 };

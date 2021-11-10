@@ -1,0 +1,5 @@
+mutation createCert($deposit_id: Float!, $plan_status: Float!) {
+  createCert(deposit_id: $deposit_id, plan_status: $plan_status){
+    ...RegularCert
+  }
+}

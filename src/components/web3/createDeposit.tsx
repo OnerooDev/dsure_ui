@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import { Dsure_address, price_1, price_2 } from '../../utils/constants';
 import { from_string_to_int } from '../../ethers/utils/decode';
 import { PlanCardsGroup } from '../lib/PlanCardsGroup';
+import { useCreateCertMutation } from '../../generated/graphql';
 
 interface CreateDepositProps {
 }
@@ -16,6 +17,7 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
     const { state: stateD2, send: Deposit2 } = Deposit_2();
     const allowance = checkAllowance();
     const { state: allow, send: Allow } = Approve();
+    const [, new_cert] = useCreateCertMutation();
 
     const handleDeposit = (plan: string) => {
       if (plan == "basic") {
@@ -26,6 +28,7 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
         } else {
           setDisabled(true);
           Deposit1();
+          new_cert({deposit_id: 2}, {plan_status: 1})
         }
       } else {
         if (from_string_to_int(allowance) < from_string_to_int(price_2)) {
@@ -35,6 +38,7 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
         } else {
           setDisabled(true);
           Deposit2();
+          new_cert({deposit_id: 2}, {plan_status: 2})
         }
       }
     }

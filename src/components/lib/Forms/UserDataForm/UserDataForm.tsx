@@ -8,6 +8,8 @@ import { Formik, Form } from 'formik';
 import { useAddIdentityUserMutation, IdentityUserInputs } from '../../../../generated/graphql';
 import { useRouter } from 'next/router';
 import { toErrorMap } from '../../../../utils/toErrorMap';
+import { Dropdown } from '../../Dropdown';
+import { countryList } from '../../../../utils/countries';
 
 interface UserDataFormProps {
   connected_account: string
@@ -56,6 +58,7 @@ interface UserDataFormProps {
       <Formik
           initialValues={in_val}
           onSubmit={async (values, {setErrors}) => {
+            console.log(values)
             const response = await addData({eth_address: connected_account, userPams: values});
             if (response.data?.addIdentityUser.errors) {
               setErrors(toErrorMap(response.data.addIdentityUser.errors))
@@ -70,8 +73,8 @@ interface UserDataFormProps {
               <InputField name="last_name" label="Last name" />
               <InputField name="middle_name" label="Middle name" />
               <InputField name="birth_date" label="Birth date" />
-              <InputField name="passport_country" label="Passport country" />
-              <InputField name="live_country" label="Residence country" />
+              <Dropdown name="passport_country" label="Passport country" options={countryList} />
+              <Dropdown name="live_country" label="Residence country" options={countryList} />
               <Button label="Confirm your data" stretch type="submit" disabled={isSubmitting} />
             </Form>
           )}

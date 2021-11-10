@@ -19,6 +19,19 @@ export type AmountResponse = {
   amount: Scalars['Float'];
 };
 
+export type Certs = {
+  __typename?: 'Certs';
+  createdAt: Scalars['String'];
+  deposit_id: Scalars['Int'];
+  expire_date: Scalars['String'];
+  id: Scalars['Int'];
+  owner: Scalars['String'];
+  plan_status: Scalars['Int'];
+  status: Scalars['Int'];
+  updatedAt: Scalars['String'];
+  url_cert: Scalars['String'];
+};
+
 export type FieldError = {
   __typename?: 'FieldError';
   field: Scalars['String'];
@@ -53,11 +66,11 @@ export type Mutation = {
   __typename?: 'Mutation';
   addIdentityUser?: Maybe<UserResponse>;
   confirmEmail?: Maybe<UserResponse>;
-  createPost: PostResponse;
+  createCert: Certs;
   createUser: UserResponse;
-  deletePost: Scalars['Boolean'];
+  deleteCert: Scalars['Boolean'];
   resendEmailConfirm: User;
-  updatePost?: Maybe<Post>;
+  updateCert?: Maybe<Certs>;
   updateUserEmail?: Maybe<User>;
 };
 
@@ -73,8 +86,9 @@ export type MutationConfirmEmailArgs = {
 };
 
 
-export type MutationCreatePostArgs = {
-  title: Scalars['String'];
+export type MutationCreateCertArgs = {
+  deposit_id: Scalars['Float'];
+  plan_status: Scalars['Float'];
 };
 
 
@@ -83,7 +97,7 @@ export type MutationCreateUserArgs = {
 };
 
 
-export type MutationDeletePostArgs = {
+export type MutationDeleteCertArgs = {
   id: Scalars['Float'];
 };
 
@@ -93,9 +107,9 @@ export type MutationResendEmailConfirmArgs = {
 };
 
 
-export type MutationUpdatePostArgs = {
+export type MutationUpdateCertArgs = {
   id: Scalars['Float'];
-  title?: Maybe<Scalars['String']>;
+  url_cert?: Maybe<Scalars['String']>;
 };
 
 
@@ -104,25 +118,11 @@ export type MutationUpdateUserEmailArgs = {
   id: Scalars['Float'];
 };
 
-export type Post = {
-  __typename?: 'Post';
-  createdAt: Scalars['String'];
-  id: Scalars['Int'];
-  title: Scalars['String'];
-  updatedAt: Scalars['String'];
-};
-
-export type PostResponse = {
-  __typename?: 'PostResponse';
-  errors?: Maybe<Array<FieldError>>;
-  post?: Maybe<Post>;
-};
-
 export type Query = {
   __typename?: 'Query';
+  cert?: Maybe<Certs>;
+  certs: Array<Certs>;
   emailExist?: Maybe<User>;
-  post?: Maybe<Post>;
-  posts: Array<Post>;
   tokenAllowance?: Maybe<AmountResponse>;
   tokenBalance?: Maybe<AmountResponse>;
   user?: Maybe<User>;
@@ -132,13 +132,13 @@ export type Query = {
 };
 
 
-export type QueryEmailExistArgs = {
-  eth_address: Scalars['String'];
+export type QueryCertArgs = {
+  id: Scalars['Float'];
 };
 
 
-export type QueryPostArgs = {
-  id: Scalars['Float'];
+export type QueryEmailExistArgs = {
+  eth_address: Scalars['String'];
 };
 
 
@@ -193,6 +193,8 @@ export type CreateUserInputs = {
   eth_address: Scalars['String'];
 };
 
+export type RegularCertFragment = { __typename?: 'Certs', id: number, deposit_id: number, status: number, expire_date: string, plan_status: number };
+
 export type RegularErrorFragment = { __typename?: 'FieldError', field: string, message: string };
 
 export type RegularUserFragment = { __typename?: 'User', id: number, eth_address: string, email: string, email_status: number, first_name: string };
@@ -213,6 +215,14 @@ export type ConfirmEmailMutationVariables = Exact<{
 
 
 export type ConfirmEmailMutation = { __typename?: 'Mutation', confirmEmail?: Maybe<{ __typename?: 'UserResponse', errors?: Maybe<Array<{ __typename?: 'FieldError', field: string, message: string }>>, user?: Maybe<{ __typename?: 'User', id: number, eth_address: string, email: string, email_status: number, first_name: string }> }> };
+
+export type CreateCertMutationVariables = Exact<{
+  deposit_id: Scalars['Float'];
+  plan_status: Scalars['Float'];
+}>;
+
+
+export type CreateCertMutation = { __typename?: 'Mutation', createCert: { __typename?: 'Certs', id: number, deposit_id: number, status: number, expire_date: string, plan_status: number } };
 
 export type CreateUserMutationVariables = Exact<{
   userPams: CreateUserInputs;
@@ -263,6 +273,15 @@ export type GetVaultsQueryVariables = Exact<{
 
 export type GetVaultsQuery = { __typename?: 'Query', vaultID?: Maybe<{ __typename?: 'IDResponse', id: string }> };
 
+export const RegularCertFragmentDoc = gql`
+    fragment RegularCert on Certs {
+  id
+  deposit_id
+  status
+  expire_date
+  plan_status
+}
+    `;
 export const RegularErrorFragmentDoc = gql`
     fragment RegularError on FieldError {
   field
@@ -310,6 +329,17 @@ export const ConfirmEmailDocument = gql`
 
 export function useConfirmEmailMutation() {
   return Urql.useMutation<ConfirmEmailMutation, ConfirmEmailMutationVariables>(ConfirmEmailDocument);
+};
+export const CreateCertDocument = gql`
+    mutation createCert($deposit_id: Float!, $plan_status: Float!) {
+  createCert(deposit_id: $deposit_id, plan_status: $plan_status) {
+    ...RegularCert
+  }
+}
+    ${RegularCertFragmentDoc}`;
+
+export function useCreateCertMutation() {
+  return Urql.useMutation<CreateCertMutation, CreateCertMutationVariables>(CreateCertDocument);
 };
 export const CreateUserDocument = gql`
     mutation createUser($userPams: createUserInputs!) {
