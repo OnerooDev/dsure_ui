@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import styles from "./certificate.module.css";
+import {Button} from '../Button';
 
 import {
   CheckCircleIcon,
@@ -18,6 +19,10 @@ export type CertificateProps = {
   staked: string;
   plan: string;
   items: Array<string>;
+  onSubmit?: any;
+  isSubmitting?: boolean;
+  btn_label: string;
+  timeout?: number;
 };
 
 export const Certificate: FC<CertificateProps> = ({
@@ -29,6 +34,10 @@ export const Certificate: FC<CertificateProps> = ({
   staked,
   plan,
   items,
+  onSubmit,
+  isSubmitting,
+  btn_label,
+  timeout
 }) => (
   <div className={styles.container}>
     <div className={styles.header}>
@@ -84,11 +93,11 @@ export const Certificate: FC<CertificateProps> = ({
         <>
         <li className={styles.item}>
           <span className={styles.itemTitle}>
-            Certificate № {cert_number}
+            Certificate №
           </span>
           <div className={styles.itemDescriptionWrapper}>
             <span className={styles.itemDescriptionTitle}>
-              Active
+              {cert_number}
             </span>
           </div>
         </li>
@@ -136,15 +145,24 @@ export const Certificate: FC<CertificateProps> = ({
               </>
             ) : (
               <>
-                <span className={styles.itemDescriptionContent}>
-                  Waiting for blockchain...
-                </span>
+                {timeout <= 0 ? (
+                  <span className={styles.itemDescriptionContent}>
+                    Waiting for withdraw...
+                  </span>
+                ) : (
+                  <span className={styles.itemDescriptionContent}>
+                    Waiting for unlock... {timeout} min
+                  </span>
+                )}
                 <ClockCircleIcon />
               </>
             )}
           </div>
         </div>
       </li>
+      <span className={styles.title}>
+      <Button label={btn_label} stretch onClick={onSubmit} disabled={isSubmitting} />
+      </span>
     </ul>
   </div>
 );

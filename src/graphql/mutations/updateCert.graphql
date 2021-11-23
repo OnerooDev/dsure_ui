@@ -1,0 +1,5 @@
+mutation updateCert($id: Float!, $expire_date: Float!, $url_cert: String!, $cert_number: String!) {
+  updateCert(id: $id, expire_date: $expire_date, url_cert: $url_cert, cert_number: $cert_number){
+    ...RegularCert
+  }
+}

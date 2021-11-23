@@ -1,5 +1,0 @@
-query GetTokenAllowance($eth_address: String!) {
-  tokenAllowance(eth_address: $eth_address) {
-    amount
-  }
-}

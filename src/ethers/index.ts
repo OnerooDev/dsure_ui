@@ -4,32 +4,46 @@ import {Token_abi} from './abi/token_abi';
 import { ethers } from 'ethers';
 import { Contract } from '../../node_modules/@usedapp/core/node_modules/@ethersproject/contracts/lib/index';
 import { Dsure_address, Token_address, price_1, price_2 } from '../utils/constants';
+import { from_string_to_int } from './utils/decode';
 
 const dsure_interface = new ethers.utils.Interface(Dsure_abi);
 const token_interface = new ethers.utils.Interface(Token_abi);
 
 // //types
-// class Info {
-//   id: String;
-//   address: String;
-//   plan: String;
-//   amount: Number;
-//   status: String;
-//   timelock: Number;
-// }
-
-export const Deposit_1 = () => {
+class Info {
+  id: string;
+  address: string;
+  plan: number;
+  amount: number;
+  status: number;
+  timelock: number;
+}
+export const withdrawVault = () => {
   const Dsure_contract = new Contract(Dsure_address, dsure_interface);
-  const { state, send } = useContractFunction(Dsure_contract, 'Deposit_plan_1', {})
+  const { state, send } = useContractFunction(Dsure_contract, 'withdrawVault', {})
 
   return { state, send };
 }
 
-export const Deposit_2 = () => {
+export const reinvestVault = () => {
   const Dsure_contract = new Contract(Dsure_address, dsure_interface);
-  const { state, send } = useContractFunction(Dsure_contract, 'Deposit_plan_2', {})
+  const { state, send } = useContractFunction(Dsure_contract, 'reinvestVault', {})
 
   return { state, send };
+}
+
+export const Deposit_1 = () => {
+  const Dsure_contract = new Contract(Dsure_address, dsure_interface);
+  const { state, send, events } = useContractFunction(Dsure_contract, 'Deposit_plan_1', {})
+
+  return { state, send, events };
+}
+
+export const Deposit_2 = () => {
+  const Dsure_contract = new Contract(Dsure_address, dsure_interface);
+  const { state, send, events } = useContractFunction(Dsure_contract, 'Deposit_plan_2', {})
+
+  return { state, send, events };
 }
 
 export const Approve = () => {
@@ -61,4 +75,30 @@ export function Get_vaults (): string {
   }) ?? [];
 
   return vault.toString();
+}
+
+export function Get_info (id: string) {
+  const vault = useContractCall({
+    abi: dsure_interface,
+    address: Dsure_address,
+    method:  'getInfo',
+    args: [id]
+  }) ?? [];
+
+  const info = (vault.toString()).split(',');
+  const typed_info: Info = {
+    id: id,
+    address: info[0],
+    plan: from_string_to_int(info[1]),
+    amount: from_string_to_int(info[2]),
+    status: from_string_to_int(info[3]),
+    timelock: from_string_to_int(info[4])
+  };
+
+  const out = {
+    data: {
+      vaultInfo: typed_info
+    }
+  };
+  return out;
 }

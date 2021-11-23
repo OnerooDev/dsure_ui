@@ -1,6 +1,7 @@
 import { IOption } from '../components/lib/Dropdown/Dropdown';
 
 export const countryList: Array<IOption> = [
+	{text: 'Select', value: 'Select'},
 	{text: 'Afghanistan', value: 'Afghanistan'},
 	{text: 'Albania', value: 'Albania'},
 	{text: 'Algeria', value: 'Algeria'},

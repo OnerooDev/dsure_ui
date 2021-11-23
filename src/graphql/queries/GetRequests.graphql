@@ -1,0 +1,5 @@
+query GetRequests {
+  requests {
+    ...RegularCert
+  }
+}

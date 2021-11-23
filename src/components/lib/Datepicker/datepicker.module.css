@@ -9,13 +9,13 @@
   position: relative;
 
   width: 100%;
-  max-width: 500px;
+  max-width: 120px;
 }
 
 .label {
   display: block;
 
-  margin-right: 24px;
+  margin-right: 25px;
 
   font-size: 16px;
   line-height: 150%;
@@ -27,8 +27,8 @@
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
-  padding: 18px 20px;
+  width: 95%;
+  padding: 10px 10px;
 
   background: var(--white);
   border: 2px solid transparent;

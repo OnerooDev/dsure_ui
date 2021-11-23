@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import styles from "./hero.module.css";
 
 import { Button } from "../../Button";
@@ -23,7 +22,7 @@ export const Hero: FC = () => (
           <h1 className={styles.title}>
             Get worldwide health insurance for a lifetime
           </h1>
-          <Button label="Calculate prices" stretch />
+          <Button label="Calculate prices" stretch/>
         </div>
       </div>
     </div>

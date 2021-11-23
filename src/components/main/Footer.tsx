@@ -15,17 +15,17 @@ export const Footer: FC = () => (
       </div>
       <ul className={styles.list}>
         <li className={styles.item}>
-          <a href="#" className={styles.link}>
+          <a href="/#" className={styles.link}>
             How it works
           </a>
         </li>
         <li className={styles.item}>
-          <a href="#" className={styles.link}>
+          <a href="/#" className={styles.link}>
             Plans
           </a>
         </li>
         <li className={styles.item}>
-          <a href="#" className={styles.link}>
+          <a href="/#" className={styles.link}>
             FAQ
           </a>
         </li>

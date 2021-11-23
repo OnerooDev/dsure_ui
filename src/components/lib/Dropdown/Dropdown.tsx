@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import classnames from "classnames";
 import styles from "./dropdown.module.css";
-import { Field } from 'formik';
+import { SelectField } from '../../utils/SelectField';
 
 export interface IOption {
   text: string;
@@ -27,11 +27,7 @@ export const Dropdown: FC<DropdownProps> = ({ label, options, name }) => {
         {label}
       </span>
       <div className={styles.content}>
-      <Field className={styles.trigger} as='select' id={name} name={name}>
-            {options.map((item) => (
-                  <option className={styles.item} key={item.text} value={item.value}>{item.text}</option>
-            ))}
-      </Field>
+        <SelectField className={styles.trigger} name={name} options={options}/>
       </div>
     </div>
   );

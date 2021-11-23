@@ -1,0 +1,11 @@
+query GetCert($deposit_id: Float!) {
+  cert(deposit_id: $deposit_id) {
+    id
+    deposit_id
+    plan_status
+    status
+    expire_date
+    url_cert
+    cert_number
+  }
+}

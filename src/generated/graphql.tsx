@@ -21,9 +21,10 @@ export type AmountResponse = {
 
 export type Certs = {
   __typename?: 'Certs';
+  cert_number: Scalars['String'];
   createdAt: Scalars['String'];
   deposit_id: Scalars['Int'];
-  expire_date: Scalars['String'];
+  expire_date: Scalars['Int'];
   id: Scalars['Int'];
   owner: Scalars['String'];
   plan_status: Scalars['Int'];
@@ -44,21 +45,23 @@ export type IdResponse = {
 };
 
 export type IdentityUserInputs = {
-  birth_date: Scalars['String'];
+  day: Scalars['String'];
   first_name: Scalars['String'];
   last_name: Scalars['String'];
   live_country: Scalars['String'];
   middle_name: Scalars['String'];
+  month: Scalars['String'];
   passport_country: Scalars['String'];
+  year: Scalars['String'];
 };
 
 export type InfoResponse = {
   __typename?: 'InfoResponse';
   address: Scalars['String'];
   amount: Scalars['Float'];
-  id: Scalars['String'];
-  plan: Scalars['String'];
-  status: Scalars['String'];
+  id: Scalars['Float'];
+  plan: Scalars['Float'];
+  status: Scalars['Float'];
   timelock: Scalars['Float'];
 };
 
@@ -66,7 +69,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addIdentityUser?: Maybe<UserResponse>;
   confirmEmail?: Maybe<UserResponse>;
-  createCert: Certs;
+  createCert?: Maybe<Certs>;
   createUser: UserResponse;
   deleteCert: Scalars['Boolean'];
   resendEmailConfirm: User;
@@ -88,6 +91,7 @@ export type MutationConfirmEmailArgs = {
 
 export type MutationCreateCertArgs = {
   deposit_id: Scalars['Float'];
+  owner: Scalars['String'];
   plan_status: Scalars['Float'];
 };
 
@@ -108,8 +112,10 @@ export type MutationResendEmailConfirmArgs = {
 
 
 export type MutationUpdateCertArgs = {
+  cert_number: Scalars['String'];
+  expire_date: Scalars['Float'];
   id: Scalars['Float'];
-  url_cert?: Maybe<Scalars['String']>;
+  url_cert: Scalars['String'];
 };
 
 
@@ -123,6 +129,7 @@ export type Query = {
   cert?: Maybe<Certs>;
   certs: Array<Certs>;
   emailExist?: Maybe<User>;
+  requests: Array<Certs>;
   tokenAllowance?: Maybe<AmountResponse>;
   tokenBalance?: Maybe<AmountResponse>;
   user?: Maybe<User>;
@@ -133,7 +140,7 @@ export type Query = {
 
 
 export type QueryCertArgs = {
-  id: Scalars['Float'];
+  deposit_id: Scalars['Float'];
 };
 
 
@@ -163,7 +170,7 @@ export type QueryVaultIdArgs = {
 
 
 export type QueryVaultInfoArgs = {
-  id: Scalars['String'];
+  id: Scalars['Float'];
 };
 
 export type User = {
@@ -193,7 +200,7 @@ export type CreateUserInputs = {
   eth_address: Scalars['String'];
 };
 
-export type RegularCertFragment = { __typename?: 'Certs', id: number, deposit_id: number, status: number, expire_date: string, plan_status: number };
+export type RegularCertFragment = { __typename?: 'Certs', id: number, deposit_id: number, status: number, plan_status: number, owner: string };
 
 export type RegularErrorFragment = { __typename?: 'FieldError', field: string, message: string };
 
@@ -218,11 +225,12 @@ export type ConfirmEmailMutation = { __typename?: 'Mutation', confirmEmail?: May
 
 export type CreateCertMutationVariables = Exact<{
   deposit_id: Scalars['Float'];
+  owner: Scalars['String'];
   plan_status: Scalars['Float'];
 }>;
 
 
-export type CreateCertMutation = { __typename?: 'Mutation', createCert: { __typename?: 'Certs', id: number, deposit_id: number, status: number, expire_date: string, plan_status: number } };
+export type CreateCertMutation = { __typename?: 'Mutation', createCert?: Maybe<{ __typename?: 'Certs', id: number, deposit_id: number, status: number, plan_status: number, owner: string }> };
 
 export type CreateUserMutationVariables = Exact<{
   userPams: CreateUserInputs;
@@ -238,6 +246,16 @@ export type ResendEmailConfirmMutationVariables = Exact<{
 
 export type ResendEmailConfirmMutation = { __typename?: 'Mutation', resendEmailConfirm: { __typename?: 'User', id: number, eth_address: string, email: string, email_status: number, first_name: string } };
 
+export type UpdateCertMutationVariables = Exact<{
+  id: Scalars['Float'];
+  expire_date: Scalars['Float'];
+  url_cert: Scalars['String'];
+  cert_number: Scalars['String'];
+}>;
+
+
+export type UpdateCertMutation = { __typename?: 'Mutation', updateCert?: Maybe<{ __typename?: 'Certs', id: number, deposit_id: number, status: number, plan_status: number, owner: string }> };
+
 export type EmailExistQueryVariables = Exact<{
   eth_address: Scalars['String'];
 }>;
@@ -245,41 +263,25 @@ export type EmailExistQueryVariables = Exact<{
 
 export type EmailExistQuery = { __typename?: 'Query', emailExist?: Maybe<{ __typename?: 'User', id: number, eth_address: string, email: string, email_status: number, first_name: string }> };
 
-export type GetTokenAllowanceQueryVariables = Exact<{
-  eth_address: Scalars['String'];
+export type GetCertQueryVariables = Exact<{
+  deposit_id: Scalars['Float'];
 }>;
 
 
-export type GetTokenAllowanceQuery = { __typename?: 'Query', tokenAllowance?: Maybe<{ __typename?: 'AmountResponse', amount: number }> };
+export type GetCertQuery = { __typename?: 'Query', cert?: Maybe<{ __typename?: 'Certs', id: number, deposit_id: number, plan_status: number, status: number, expire_date: number, url_cert: string, cert_number: string }> };
 
-export type GetTokenBalanceQueryVariables = Exact<{
-  eth_address: Scalars['String'];
-}>;
+export type GetRequestsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTokenBalanceQuery = { __typename?: 'Query', tokenBalance?: Maybe<{ __typename?: 'AmountResponse', amount: number }> };
-
-export type GetInfoQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type GetInfoQuery = { __typename?: 'Query', vaultInfo?: Maybe<{ __typename?: 'InfoResponse', id: string, address: string, plan: string, amount: number, status: string, timelock: number }> };
-
-export type GetVaultsQueryVariables = Exact<{
-  eth_address: Scalars['String'];
-}>;
-
-
-export type GetVaultsQuery = { __typename?: 'Query', vaultID?: Maybe<{ __typename?: 'IDResponse', id: string }> };
+export type GetRequestsQuery = { __typename?: 'Query', requests: Array<{ __typename?: 'Certs', id: number, deposit_id: number, status: number, plan_status: number, owner: string }> };
 
 export const RegularCertFragmentDoc = gql`
     fragment RegularCert on Certs {
   id
   deposit_id
   status
-  expire_date
   plan_status
+  owner
 }
     `;
 export const RegularErrorFragmentDoc = gql`
@@ -331,8 +333,8 @@ export function useConfirmEmailMutation() {
   return Urql.useMutation<ConfirmEmailMutation, ConfirmEmailMutationVariables>(ConfirmEmailDocument);
 };
 export const CreateCertDocument = gql`
-    mutation createCert($deposit_id: Float!, $plan_status: Float!) {
-  createCert(deposit_id: $deposit_id, plan_status: $plan_status) {
+    mutation createCert($deposit_id: Float!, $owner: String!, $plan_status: Float!) {
+  createCert(deposit_id: $deposit_id, owner: $owner, plan_status: $plan_status) {
     ...RegularCert
   }
 }
@@ -363,6 +365,22 @@ export const ResendEmailConfirmDocument = gql`
 export function useResendEmailConfirmMutation() {
   return Urql.useMutation<ResendEmailConfirmMutation, ResendEmailConfirmMutationVariables>(ResendEmailConfirmDocument);
 };
+export const UpdateCertDocument = gql`
+    mutation updateCert($id: Float!, $expire_date: Float!, $url_cert: String!, $cert_number: String!) {
+  updateCert(
+    id: $id
+    expire_date: $expire_date
+    url_cert: $url_cert
+    cert_number: $cert_number
+  ) {
+    ...RegularCert
+  }
+}
+    ${RegularCertFragmentDoc}`;
+
+export function useUpdateCertMutation() {
+  return Urql.useMutation<UpdateCertMutation, UpdateCertMutationVariables>(UpdateCertDocument);
+};
 export const EmailExistDocument = gql`
     query EmailExist($eth_address: String!) {
   emailExist(eth_address: $eth_address) {
@@ -374,52 +392,31 @@ export const EmailExistDocument = gql`
 export function useEmailExistQuery(options: Omit<Urql.UseQueryArgs<EmailExistQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<EmailExistQuery>({ query: EmailExistDocument, ...options });
 };
-export const GetTokenAllowanceDocument = gql`
-    query GetTokenAllowance($eth_address: String!) {
-  tokenAllowance(eth_address: $eth_address) {
-    amount
-  }
-}
-    `;
-
-export function useGetTokenAllowanceQuery(options: Omit<Urql.UseQueryArgs<GetTokenAllowanceQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetTokenAllowanceQuery>({ query: GetTokenAllowanceDocument, ...options });
-};
-export const GetTokenBalanceDocument = gql`
-    query GetTokenBalance($eth_address: String!) {
-  tokenBalance(eth_address: $eth_address) {
-    amount
-  }
-}
-    `;
-
-export function useGetTokenBalanceQuery(options: Omit<Urql.UseQueryArgs<GetTokenBalanceQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetTokenBalanceQuery>({ query: GetTokenBalanceDocument, ...options });
-};
-export const GetInfoDocument = gql`
-    query GetInfo($id: String!) {
-  vaultInfo(id: $id) {
+export const GetCertDocument = gql`
+    query GetCert($deposit_id: Float!) {
+  cert(deposit_id: $deposit_id) {
     id
-    address
-    plan
-    amount
+    deposit_id
+    plan_status
     status
-    timelock
+    expire_date
+    url_cert
+    cert_number
   }
 }
     `;
 
-export function useGetInfoQuery(options: Omit<Urql.UseQueryArgs<GetInfoQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetInfoQuery>({ query: GetInfoDocument, ...options });
+export function useGetCertQuery(options: Omit<Urql.UseQueryArgs<GetCertQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetCertQuery>({ query: GetCertDocument, ...options });
 };
-export const GetVaultsDocument = gql`
-    query GetVaults($eth_address: String!) {
-  vaultID(eth_address: $eth_address) {
-    id
+export const GetRequestsDocument = gql`
+    query GetRequests {
+  requests {
+    ...RegularCert
   }
 }
-    `;
+    ${RegularCertFragmentDoc}`;
 
-export function useGetVaultsQuery(options: Omit<Urql.UseQueryArgs<GetVaultsQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetVaultsQuery>({ query: GetVaultsDocument, ...options });
+export function useGetRequestsQuery(options: Omit<Urql.UseQueryArgs<GetRequestsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetRequestsQuery>({ query: GetRequestsDocument, ...options });
 };

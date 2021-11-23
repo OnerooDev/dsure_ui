@@ -3,6 +3,7 @@ import { FC, FormEvent } from "react";
 import styles from "../form.module.css";
 import {Button} from "../../Button";
 import {Container} from "../../Container";
+import {Title} from "../../Title";
 import {Description} from "../../Description";
 //import {Input} from "../../Input";
 import { InputField } from '../../../utils/InputField';
@@ -46,6 +47,9 @@ interface CreateAccountFormProps {
 
   return (
     <Container>
+      <Title>
+        Create an account
+      </Title>
       <Formik
           initialValues={{ eth_address: connected_account, email: ""}}
           onSubmit={async (values, {setErrors}) => {

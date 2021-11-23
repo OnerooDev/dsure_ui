@@ -2,6 +2,6 @@ fragment RegularCert on Certs {
   id
   deposit_id
   status
-  expire_date
   plan_status
+  owner
 }

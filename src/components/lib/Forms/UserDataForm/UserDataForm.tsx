@@ -3,12 +3,14 @@ import { FC } from "react";
 import styles from "../form.module.css";
 import {Button} from "../../Button";
 import {Container} from "../../Container";
+import {Title} from "../../Title";
 import { InputField } from '../../../utils/InputField';
 import { Formik, Form } from 'formik';
 import { useAddIdentityUserMutation, IdentityUserInputs } from '../../../../generated/graphql';
 import { useRouter } from 'next/router';
 import { toErrorMap } from '../../../../utils/toErrorMap';
 import { Dropdown } from '../../Dropdown';
+import { Datepicker } from '../../Datepicker';
 import { countryList } from '../../../../utils/countries';
 
 interface UserDataFormProps {
@@ -48,13 +50,16 @@ interface UserDataFormProps {
      first_name: "",
      last_name: "",
      middle_name: "",
-     birth_date: "",
+     day: "",
+     month: "",
+     year: "",
      passport_country: "",
      live_country: ""
    };
 
   return (
     <Container>
+      <Title>Personal information</Title>
       <Formik
           initialValues={in_val}
           onSubmit={async (values, {setErrors}) => {
@@ -72,7 +77,7 @@ interface UserDataFormProps {
               <InputField name="first_name" label="First name" />
               <InputField name="last_name" label="Last name" />
               <InputField name="middle_name" label="Middle name" />
-              <InputField name="birth_date" label="Birth date" />
+              <Datepicker label="Birth date" />
               <Dropdown name="passport_country" label="Passport country" options={countryList} />
               <Dropdown name="live_country" label="Residence country" options={countryList} />
               <Button label="Confirm your data" stretch type="submit" disabled={isSubmitting} />

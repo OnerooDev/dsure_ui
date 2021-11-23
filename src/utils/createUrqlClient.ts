@@ -13,7 +13,7 @@ function betterUpdateQuery<Result, Query>(
 }
 
 export const createUrqlClient: NextUrqlClientConfig = (ssrExchange: SSRExchange, ctx?: any): ClientOptions => ({
-  url: 'https://dsure-back.onerood.dev/graphql',
+  url: 'http://localhost:3001/graphql',
   fetchOptions: {
     credentials: 'include' as const,
   },
