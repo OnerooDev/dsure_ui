@@ -3,6 +3,7 @@ import { useEmailExistQuery } from '../../generated/graphql';
 import { CheckEmailConfirm } from './checkEmailConfirm';
 import { CreateAccountForm } from '../lib/Forms';
 import Loader from "react-loader-spinner";
+
 interface DashboardFormProps {
   connected_account: string
 }

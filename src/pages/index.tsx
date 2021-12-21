@@ -1,54 +1,34 @@
-import { Steps, Hero, Faq, Cases } from '../components/lib/MainPage';
-import { FAQitems } from '../utils/faq_items';
-import { withUrqlClient } from 'next-urql';
+import React from 'react';
+import { DashboardForm } from '../components/forms/dashboard';
+//import { } from '../generated/graphql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import { useRouter } from 'next/router';
-import { PlanCardsGroup } from '../components/lib/PlanCardsGroup';
-import { Title } from '../components/lib/Title';
+import { withUrqlClient } from 'next-urql';
+import { Metamask } from '../components/lib/Metamask'
+import { useEthers} from "@usedapp/core";
 import { Header } from '../components/main/Header';
 
-const Index = () => {
-  const router = useRouter();
+interface DashboardProps {
 
-  function handleSelectPlan() {
-    router.push('/dashboard');
-  }
+}
 
-  return (
-    <>
-      <Header />
-      <br />
-      <Hero />
-      <a id="how-it-works" />
-      <br />
-      <Title>
-        It simply works
-      </Title>
-      <Steps />
-      <a id="calculate" />
-      <br />
-      <Title>
-        Select your plan
-      </Title>
-      <PlanCardsGroup
-        onSubmit={handleSelectPlan}
-        loading={false}
-        BasText="Select plan"
-        AdvText="Select plan"
-      />
-      <a id="faq" />
-      <br />
-      <Title>
-        All cases covered
-      </Title>
-      <Cases />
-      <br />
-      <Title>
-        Frequently Asked Questions
-      </Title>
-      <Faq items={FAQitems} />
-    </>
-  )
+const Dashboard: React.FC<DashboardProps> = ({}) => {
+
+  const { account } = useEthers();
+
+  return (!account ? (
+          <>
+            <Header />
+            <br />
+            <Metamask />
+          </>
+        ) : (
+          <>
+            <Header />
+            <br />
+            <DashboardForm connected_account={account} />
+          </>
+        )
+  );
 };
 
-export default withUrqlClient(createUrqlClient)(Index);
+export default withUrqlClient(createUrqlClient)(Dashboard);

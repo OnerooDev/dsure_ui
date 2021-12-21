@@ -32,7 +32,7 @@ interface ConfirmEmailFormProps {
               }
               setErrors(errorMap);
             } else if (response.data?.confirmEmail.user) {
-              router.push('/dashboard');
+              router.push('/');
             }
           }}
         >

@@ -31,17 +31,17 @@ export const Header: FC<HeaderProps> = ({ }) => {
         <nav className={styles.nav}>
           <ul className={styles.list}>
             <li className={styles.item}>
-              <a href="/#how-it-works" className={styles.link}>
+              <a href="https://dsure.io/#how-it-works" className={styles.link}>
                 How it works
               </a>
             </li>
             <li className={styles.item}>
-              <a href="/#calculate" className={styles.link}>
+              <a href="https://dsure.io/#calculate" className={styles.link}>
                 Calculator
               </a>
             </li>
             <li className={styles.item}>
-              <a href="/#faq" className={styles.link}>
+              <a href="https://dsure.io/#faq" className={styles.link}>
                 FAQ
               </a>
             </li>
