@@ -60,15 +60,15 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
 
     useEffect(() => {
       if (stateD1.status == "Success") {
-        const sat = stateD1.receipt.logs[1]
-        const ex = from_hex_to_arr(sat);
-        new_cert({deposit_id: parseInt(ex.args[0]), owner: ex.args[1], plan_status: 1})
+        //const sat = stateD1.receipt.logs[1]
+        //const ex = from_hex_to_arr(sat);
+        //new_cert({deposit_id: parseInt(ex.args[0]), owner: ex.args[1], plan_status: 1})
         router.reload();
       }
       if (stateD2.status == "Success") {
-        const sat = stateD2.receipt.logs[1]
-        const ex = from_hex_to_arr(sat);
-        new_cert({deposit_id: parseInt(ex.args[0]), owner: ex.args[1], plan_status: 1})
+        //const sat = stateD2.receipt.logs[1]
+        //const ex = from_hex_to_arr(sat);
+        //new_cert({deposit_id: parseInt(ex.args[0]), owner: ex.args[1], plan_status: 1})
         router.reload();
       }
       if (stateD1.status == "Mining" || stateD2.status == "Mining" || allow.status == "Mining") {
