@@ -14,11 +14,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type AmountResponse = {
-  __typename?: 'AmountResponse';
-  amount: Scalars['Float'];
-};
-
 export type Certs = {
   __typename?: 'Certs';
   cert_number: Scalars['String'];
@@ -39,11 +34,6 @@ export type FieldError = {
   message: Scalars['String'];
 };
 
-export type IdResponse = {
-  __typename?: 'IDResponse';
-  id: Scalars['String'];
-};
-
 export type IdentityUserInputs = {
   day: Scalars['String'];
   first_name: Scalars['String'];
@@ -51,18 +41,12 @@ export type IdentityUserInputs = {
   live_country: Scalars['String'];
   middle_name: Scalars['String'];
   month: Scalars['String'];
+  occupation: Scalars['String'];
   passport_country: Scalars['String'];
+  phone: Scalars['String'];
+  relationship: Scalars['String'];
+  sex: Scalars['String'];
   year: Scalars['String'];
-};
-
-export type InfoResponse = {
-  __typename?: 'InfoResponse';
-  address: Scalars['String'];
-  amount: Scalars['Float'];
-  id: Scalars['Float'];
-  plan: Scalars['Float'];
-  status: Scalars['Float'];
-  timelock: Scalars['Float'];
 };
 
 export type Mutation = {
@@ -130,12 +114,8 @@ export type Query = {
   certs: Array<Certs>;
   emailExist?: Maybe<User>;
   requests: Array<Certs>;
-  tokenAllowance?: Maybe<AmountResponse>;
-  tokenBalance?: Maybe<AmountResponse>;
   user?: Maybe<User>;
   users: Array<User>;
-  vaultID?: Maybe<IdResponse>;
-  vaultInfo?: Maybe<InfoResponse>;
 };
 
 
@@ -149,27 +129,7 @@ export type QueryEmailExistArgs = {
 };
 
 
-export type QueryTokenAllowanceArgs = {
-  eth_address: Scalars['String'];
-};
-
-
-export type QueryTokenBalanceArgs = {
-  eth_address: Scalars['String'];
-};
-
-
 export type QueryUserArgs = {
-  id: Scalars['Float'];
-};
-
-
-export type QueryVaultIdArgs = {
-  eth_address: Scalars['String'];
-};
-
-
-export type QueryVaultInfoArgs = {
   id: Scalars['Float'];
 };
 
@@ -185,7 +145,11 @@ export type User = {
   last_name: Scalars['String'];
   live_country: Scalars['String'];
   middle_name: Scalars['String'];
+  occupation: Scalars['String'];
   passport_country: Scalars['String'];
+  phone: Scalars['String'];
+  relationship: Scalars['String'];
+  sex: Scalars['String'];
   updatedAt: Scalars['String'];
 };
 

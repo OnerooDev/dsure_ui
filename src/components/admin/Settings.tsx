@@ -3,14 +3,21 @@ import { Header } from './Header';
 import NextLink from 'next/link';
 import { Container } from '../lib/Container';
 import styles from "../lib/Forms/form.module.css";
-import { Steps } from "./MainPage/Steps";
-export const MainPage = (
+
+export const Settings = (
   <>
     <Header />
     <br />
     <Container>
     <div className={styles.container}>
-      <Steps />
+      <NextLink href="/admin/requestsCert" >
+        <Link>Requests list</Link>
+      </NextLink>
+    </div>
+    <div className={styles.container}>
+      <NextLink href="/admin/addCert">
+        <Link>Add cert</Link>
+      </NextLink>
     </div>
     </Container>
   </>

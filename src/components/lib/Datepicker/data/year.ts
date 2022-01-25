@@ -1,16 +1,7 @@
 import { IOption } from '../../Datepicker/Datepicker';
 
 export const yearList: Array<IOption> = [
-	{text: "-", value: "-"},
-	{text: "2012", value: "2012"},
-	{text: "2011", value: "2011"},
-	{text: "2010", value: "2010"},
-	{text: "2009", value: "2009"},
-	{text: "2008", value: "2008"},
-	{text: "2007", value: "2007"},
-	{text: "2006", value: "2006"},
-	{text: "2005", value: "2005"},
-	{text: "2004", value: "2004"},
+	{text: "YY", value: "-"},
 	{text: "2003", value: "2003"},
 	{text: "2002", value: "2002"},
 	{text: "2001", value: "2001"},

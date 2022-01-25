@@ -3,7 +3,7 @@ import { useDisclosure } from '@chakra-ui/react';
 import classnames from "classnames";
 import ConnectButton from "../metamask/ConnectButton";
 import AccountModal from "../metamask/AccountModal";
-import styles from "./styles/header.module.css";
+import styles from "../main/styles/header.module.css";
 import { Container } from "../lib/Container";
 import { LogoFullIcon } from "../lib/Icons";
 import { URL } from '../../utils/constants';
@@ -32,18 +32,18 @@ export const Header: FC<HeaderProps> = ({ }) => {
         <nav className={styles.nav}>
           <ul className={styles.list}>
             <li className={styles.item}>
-              <a href={ URL + "/#how-it-works"} className={styles.link}>
-                How it works
+              <a href={URL + "/admin/requestsCert"} className={styles.link}>
+                Requests list
               </a>
             </li>
             <li className={styles.item}>
-              <a href={ URL + "/#calculate"} className={styles.link}>
-                Calculator
+              <a href={URL + "/admin/settings"} className={styles.link}>
+                Settings
               </a>
             </li>
             <li className={styles.item}>
-              <a href={ URL + "/#faq"} className={styles.link}>
-                FAQ
+              <a href={URL + "/admin/listUsers"} className={styles.link}>
+                Users
               </a>
             </li>
             <li className={styles.item}>

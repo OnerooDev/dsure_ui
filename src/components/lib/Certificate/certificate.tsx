@@ -135,7 +135,7 @@ export const Certificate: FC<CertificateProps> = ({
                   </span>
                   {activeTill && (
                     <span className={styles.itemDescriptionContent}>
-                      till
+                      from
                       {" "}
                       {activeTill}
                     </span>

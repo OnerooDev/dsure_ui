@@ -4,7 +4,7 @@ import Loader from "react-loader-spinner";
 import { Certificate } from '../lib/Certificate';
 import { basicItems, advancedItems } from '../lib/PlanCardsGroup/plan-cards-group';
 import { Unix_to_String } from '../../utils/time_convert';
-import { Get_info, withdrawVault } from '../../ethers';
+import { Get_info, withdrawVault, Get_settings } from '../../ethers';
 //import { useRouter } from 'next/router';
 
 interface InfoProps {
@@ -19,6 +19,7 @@ export const InfoWeb3: React.FC<InfoProps> = ({id}) => {
   const { state: state, send: withdraw } = withdrawVault();
 //  const router = useRouter();
   const info = Get_info(id);
+  const settings = Get_settings();
   const [cert] = useGetCertQuery({
     variables: {
       deposit_id: parseInt(id)
@@ -33,12 +34,12 @@ export const InfoWeb3: React.FC<InfoProps> = ({id}) => {
     if (info.data.vaultInfo.status == 2) {
       setTextStatusDep("active");
     } else if (info.data.vaultInfo.status == 1) {
+      if (info.data.vaultInfo.timelock + settings.data.settings.sec_time > Date.now() / 1000) {
+        setDisabled(true);
+      } else {
+        setDisabled(false);
+      }
       setBtnLabel("Withdraw");
-    }
-    if (info.data.vaultInfo.timelock > Date.now() / 1000) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
     }
 
   }, [info]);
@@ -55,8 +56,23 @@ export const InfoWeb3: React.FC<InfoProps> = ({id}) => {
   }, [state]);
 
   const SubmitWithdraw = () => {
-    setDisabled(true);
-    withdraw();
+    if (info.data.vaultInfo.status == 2){
+      if (info.data.vaultInfo.timelock + settings.data.settings.longlock > Date.now() / 1000) {
+        if (window.confirm('Now you apply to cancel your current insurance certificate before 1 year staking. Fee amount - 2500 USDT. After 3 days you will be able to withdraw your USDT')){
+          setDisabled(true);
+          withdraw();
+        }
+      } else {
+        if (window.confirm('Now you apply to cancel your current insurance certificate and request for withdraw your staked deposit. After 3 days you will be able to withdraw your USDT')){
+          setDisabled(true);
+          withdraw();
+        }
+      }
+    }
+    if (info.data.vaultInfo.status == 1) {
+      setDisabled(true);
+      withdraw();
+    }
   }
 
   if (info.data.vaultInfo.address && cert.data) {
@@ -67,7 +83,7 @@ export const InfoWeb3: React.FC<InfoProps> = ({id}) => {
     let text_items: Array<string>;
     let cert_exp: string;
     const deposit_lock = Unix_to_String(info.data.vaultInfo.timelock);
-    const timeout = Math.round((info.data.vaultInfo.timelock - Date.now() / 1000) / 60)
+    const timeout = Math.round((info.data.vaultInfo.timelock + settings.data.settings.sec_time - Date.now() / 1000) / 60)
     //
     if (info.data.vaultInfo.plan == 1) {
       text_plan = "Basic";

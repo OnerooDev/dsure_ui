@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { toErrorMap } from '../../../../utils/toErrorMap';
 import { Dropdown } from '../../Dropdown';
 import { Datepicker } from '../../Datepicker';
-import { countryList } from '../../../../utils/countries';
+import { countryList, sexList, occupationList, relationshipList } from '../../../../utils/lists';
 
 interface UserDataFormProps {
   connected_account: string
@@ -53,8 +53,12 @@ interface UserDataFormProps {
      day: "",
      month: "",
      year: "",
+     sex: "",
+     relationship: "",
+     occupation: "",
      passport_country: "",
-     live_country: ""
+     live_country: "",
+     phone: ""
    };
 
   return (
@@ -63,7 +67,6 @@ interface UserDataFormProps {
       <Formik
           initialValues={in_val}
           onSubmit={async (values, {setErrors}) => {
-            console.log(values)
             const response = await addData({eth_address: connected_account, userPams: values});
             if (response.data?.addIdentityUser.errors) {
               setErrors(toErrorMap(response.data.addIdentityUser.errors))
@@ -77,14 +80,17 @@ interface UserDataFormProps {
               <InputField name="first_name" label="First name" />
               <InputField name="last_name" label="Last name" />
               <InputField name="middle_name" label="Middle name" />
+              <InputField name="phone" label="Phone" />
               <Datepicker label="Birth date" />
-              <Dropdown name="passport_country" label="Passport country" options={countryList} />
+              <Dropdown name="sex" label="Gender" options={sexList} />
+              <Dropdown name="passport_country" label="Citizenship" options={countryList} />
+              <Dropdown name="relationship" label="Beneficiary" options={relationshipList} />
+              <Dropdown name="occupation" label="Occupation" options={occupationList} />
               <Dropdown name="live_country" label="Residence country" options={countryList} />
               <Button label="Confirm your data" stretch type="submit" disabled={isSubmitting} />
             </Form>
           )}
       </Formik>
-
     </Container>
   );
 };

@@ -18,6 +18,15 @@ class Info {
   status: number;
   timelock: number;
 }
+class Settings {
+  price_1: number;
+  price_2: number;
+  count: number;
+  longlock: number;
+  fee: number;
+  sec_time: number;
+}
+
 export const withdrawVault = () => {
   const Dsure_contract = new Contract(Dsure_address, dsure_interface);
   const { state, send } = useContractFunction(Dsure_contract, 'withdrawVault', {})
@@ -98,6 +107,32 @@ export function Get_info (id: string) {
   const out = {
     data: {
       vaultInfo: typed_info
+    }
+  };
+  return out;
+}
+
+export function Get_settings () {
+  const vault = useContractCall({
+    abi: dsure_interface,
+    address: Dsure_address,
+    method:  'getSettings',
+    args: []
+  }) ?? [];
+
+  const info = (vault.toString()).split(',');
+  const typed_info: Settings = {
+    price_1: from_string_to_int(info[0]),
+    price_2: from_string_to_int(info[1]),
+    count: from_string_to_int(info[2]),
+    longlock: from_string_to_int(info[3]),
+    fee: from_string_to_int(info[4]),
+    sec_time: from_string_to_int(info[5])
+  };
+
+  const out = {
+    data: {
+      settings: typed_info
     }
   };
   return out;

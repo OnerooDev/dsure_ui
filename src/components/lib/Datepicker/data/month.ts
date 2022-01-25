@@ -1,7 +1,7 @@
 import { IOption } from '../../Datepicker/Datepicker';
 
 export const monthList: Array<IOption> = [
-	{text: "-", value: "-"},
+	{text: "MM", value: "-"},
 	{text: '1', value: '1'},
 	{text: '2', value: '2'},
 	{text: '3', value: '3'},

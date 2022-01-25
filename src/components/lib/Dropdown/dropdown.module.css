@@ -1,8 +1,5 @@
 .container {
-  display: flex;
-  align-items: center;
-  margin-top: 2%;
-
+  display: block;
 }
 
 .content {
@@ -13,10 +10,6 @@
 }
 
 .label {
-  display: block;
-
-  margin-right: 24px;
-
   font-size: 16px;
   line-height: 150%;
   white-space: nowrap;
@@ -24,15 +17,17 @@
 
 .trigger {
   display: flex;
+  margin-top: 9px;
   justify-content: space-between;
   align-items: center;
 
   width: 100%;
-  padding: 18px 20px;
+  padding: 9px 9px;
 
   background: var(--white);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: 8px;
+  border-color: var(--main);
   cursor: pointer;
   box-shadow: 0 10px 32px rgba(0, 84, 111, 0.1);
 
@@ -43,9 +38,9 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: calc(100% + 4px);
+  top: calc(50% + 4px);
 
-  max-height: 250px;
+  max-height: 20px;
   padding: 0;
   margin: 0;
 
@@ -70,16 +65,16 @@
 
 .item {
   width: 100%;
-  padding: 18px 20px;
+  padding: 9px 9px;
 
-  background-color: transparent;
+  background-color: #000000;
   border: none;
   cursor: pointer;
 
   color: var(--text-gray);
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 140%;
+  font-size: 9px;
+  font-weight: 14;
+  line-height: 14%;
   text-align: left;
 
   transition: 0.2s ease-in-out;
