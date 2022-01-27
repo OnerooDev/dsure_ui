@@ -2,7 +2,7 @@ import React from 'react'
 import { useEmailExistQuery } from '../../generated/graphql';
 import { CheckEmailConfirm } from './checkEmailConfirm';
 import { CreateAccountForm } from '../lib/Forms';
-import Loader from "react-loader-spinner";
+import { Loader } from "../utils/Loader";
 
 interface DashboardFormProps {
   connected_account: string
@@ -26,13 +26,7 @@ export const DashboardForm: React.FC<DashboardFormProps> = ({connected_account})
     )
   ) : (
     <>
-      <Loader
-        type="TailSpin"
-        color="#00BFFF"
-        height={50}
-        width={50}
-        timeout={3000} //3 secs
-      />
+      <Loader />
     </>
   )
   )

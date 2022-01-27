@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGetCertQuery } from '../../generated/graphql';
-import Loader from "react-loader-spinner";
+import { Loader } from "../utils/Loader";
 import { Certificate } from '../lib/Certificate';
 import { basicItems, advancedItems } from '../lib/PlanCardsGroup/plan-cards-group';
 import { Unix_to_String } from '../../utils/time_convert';
@@ -128,13 +128,7 @@ export const InfoWeb3: React.FC<InfoProps> = ({id}) => {
     } else {
       return (
         <>
-          <Loader
-            type="TailSpin"
-            color="#50EFF5"
-            height={50}
-            width={50}
-            timeout={3000} //3 secs
-          />
+          <Loader />
         </>
       )
     }

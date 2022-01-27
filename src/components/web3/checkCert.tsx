@@ -1,6 +1,6 @@
 //import { useGetCertQuery, useCreateCertMutation } from '../../generated/graphql';
 import { InfoWeb3 } from './info';
-import Loader from "react-loader-spinner";
+import { Loader } from "../utils/Loader";
 import { Get_vaults } from '../../ethers/index';
 import { CreateDepositWeb3 } from './createDeposit';
 
@@ -28,13 +28,7 @@ export const CheckCert: React.FC<CheckCertProps> = ({}) => {
   } else {
     return (
         <>
-          <Loader
-            type="TailSpin"
-            color="#00BFFF"
-            height={50}
-            width={50}
-            timeout={3000} //3 secs
-          />
+          <Loader />
         </>
       )
   }
