@@ -1,4 +1,4 @@
-import { IOption } from '../components/lib/Dropdown/Dropdown';
+import { IOption } from '../../components/lib/Dropdown/Dropdown';
 
 export const countryList: Array<IOption> = [
 	{text: 'Select', value: 'Select'},
