@@ -1,7 +1,6 @@
 import { ThemeProvider, CSSReset,  } from '@chakra-ui/react'
 import theme from '../theme';
 import { DAppProvider, Config } from "@usedapp/core";
-import { Footer } from '../components/main/Footer';
 import {node_network_id} from '../utils/constants';
 import "../theme/style.css";
 
@@ -19,7 +18,6 @@ function MyApp({ Component, pageProps }: any) {
           <main className="page-main">
             <Component {...pageProps} />
           </main>
-          <Footer />
         </DAppProvider>
       </ThemeProvider>
   )

@@ -280,6 +280,19 @@ export const Dsure_abi = `[
     {
       "inputs": [
         {
+          "internalType": "contract IERC20",
+          "name": "_deposit_token",
+          "type": "address"
+        }
+      ],
+      "name": "SettingsPayToken",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "uint256",
           "name": "_price_1",
           "type": "uint256"
@@ -418,6 +431,16 @@ export const Dsure_abi = `[
         {
           "internalType": "uint256",
           "name": "_secure_time",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_reinvested",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_requested",
           "type": "uint256"
         }
       ],
