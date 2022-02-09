@@ -6,7 +6,6 @@ import AccountModal from "../metamask/AccountModal";
 import styles from "./styles/header.module.css";
 import { Container } from "../lib/Container";
 import { LogoFullIcon } from "../lib/Icons";
-import { URL } from '../../utils/constants';
 
 export type HeaderProps = {
 };
@@ -32,17 +31,17 @@ export const Header: FC<HeaderProps> = ({ }) => {
         <nav className={styles.nav}>
           <ul className={styles.list}>
             <li className={styles.item}>
-              <a href={ URL + "/#how-it-works"} className={styles.link}>
+              <a href={"https://dsure.io/#how-it-works"} className={styles.link}>
                 How it works
               </a>
             </li>
             <li className={styles.item}>
-              <a href={ URL + "/#calculate"} className={styles.link}>
-                Calculator
+              <a href={"https://dsure.io/#calculate"} className={styles.link}>
+                Plans
               </a>
             </li>
             <li className={styles.item}>
-              <a href={ URL + "/#faq"} className={styles.link}>
+              <a href={"https://dsure.io/#faq"} className={styles.link}>
                 FAQ
               </a>
             </li>

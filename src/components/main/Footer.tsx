@@ -15,17 +15,17 @@ export const Footer: FC = () => (
       </div>
       <ul className={styles.list}>
         <li className={styles.item}>
-          <a href="/#" className={styles.link}>
+          <a href="https://dsure.io/#how-it-works" className={styles.link}>
             How it works
           </a>
         </li>
         <li className={styles.item}>
-          <a href="/#" className={styles.link}>
+          <a href="https://dsure.io/#plans" className={styles.link}>
             Plans
           </a>
         </li>
         <li className={styles.item}>
-          <a href="/#" className={styles.link}>
+          <a href="https://dsure.io/#faq" className={styles.link}>
             FAQ
           </a>
         </li>
