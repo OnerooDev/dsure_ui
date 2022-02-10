@@ -1,4 +1,4 @@
-// import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 import { Text } from "@chakra-ui/react";
 import { useEthers, useTokenBalance } from "@usedapp/core";
 //import Identicon from "./Identicon";
@@ -13,15 +13,8 @@ type Props = {
 };
 
 export default function ConnectButton({ handleOpenModal }: Props) {
-  const { activateBrowserWallet, account, chainId } = useEthers();
+  const { activateBrowserWallet, account } = useEthers();
   const usdtBalance = useTokenBalance(Token_address, account);
-//  const [activateError, setActivateError] = useState('')
-
-  // useEffect(() => {
-  // if (error) {
-  //   setActivateError(error.message)
-  // }
-  // }, [error])
 
   function handleConnectWallet() {
     activateBrowserWallet();
@@ -37,7 +30,7 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         <UserIcon />
       </button>
       <Text fontSize="md" ml={2} textColor="#50EFF5">
-        {usdtBalance && parseFloat(utils.formatUnits(usdtBalance, 18)).toFixed(2)} USDT {chainId}
+        {usdtBalance && parseFloat(utils.formatUnits(usdtBalance, 18)).toFixed(2)} USDT
       </Text>
     </>
   ) : (
