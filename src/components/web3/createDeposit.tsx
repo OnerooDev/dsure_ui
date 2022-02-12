@@ -15,18 +15,18 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
     const [disabled, setDisabled] = useState(false);
     const [approwedD1, setapprowedD1] = useState("");
     const [approwedD2, setapprowedD2] = useState("");
-    const [amountErr, setamountErr] = useState("");
+    const [amountErr1, setamountErr1] = useState("");
+    const [amountErr2, setamountErr2] = useState("");
     const { state: stateD1, send: Deposit1, events } = Deposit_1();
     const { state: stateD2, send: Deposit2 } = Deposit_2();
     const allowance = checkAllowance();
-    const balance = checkBalance();
+  //  const balance = checkBalance();
     const { state: allow, send: Allow } = Approve();
     const router = useRouter();
     //const [, new_cert] = useCreateCertMutation();
 
     const handleDeposit = (plan: string) => {
       if (plan == "basic") {
-        if (from_string_to_int(balance) >= from_string_to_int(price_1)) {
           if (from_string_to_int(allowance) < from_string_to_int(price_1)) {
             const sum = ethers.BigNumber.from(price_1);
             setDisabled(true);
@@ -35,11 +35,11 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
             setDisabled(true);
             Deposit1();
           }
-        } else {
-          setamountErr("Not enough USDT")
-        }
+        // } else {
+        //   setamountErr("Not enough USDT")
+        // }
       } else {
-        if (from_string_to_int(balance) >= from_string_to_int(price_2)) {
+        //if (from_string_to_int(balance) >= from_string_to_int(price_2)) {
           if (from_string_to_int(allowance) < from_string_to_int(price_2)) {
             const sum = ethers.BigNumber.from(price_2);
             setDisabled(true);
@@ -48,9 +48,9 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
             setDisabled(true);
             Deposit2();
           }
-        } else {
-          setamountErr("Not enough USDT")
-        }
+        // } else {
+        //   setamountErr("Not enough USDT")
+        // }
       }
     }
 
@@ -69,16 +69,16 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
     }, [allowance]);
 
     useEffect(() => {
+      if (stateD1.errorMessage) {
+        setamountErr1(stateD1.errorMessage)
+      }
+      if (stateD2.errorMessage) {
+        setamountErr2(stateD2.errorMessage)
+      }
       if (stateD1.status == "Success") {
-        //const sat = stateD1.receipt.logs[1]
-        //const ex = from_hex_to_arr(sat);
-        //new_cert({deposit_id: parseInt(ex.args[0]), owner: ex.args[1], plan_status: 1})
         router.reload();
       }
       if (stateD2.status == "Success") {
-        //const sat = stateD2.receipt.logs[1]
-        //const ex = from_hex_to_arr(sat);
-        //new_cert({deposit_id: parseInt(ex.args[0]), owner: ex.args[1], plan_status: 1})
         router.reload();
       }
       if (stateD1.status == "Mining" || stateD2.status == "Mining" || allow.status == "Mining") {
@@ -99,7 +99,8 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
           loading={disabled}
           BasText={approwedD1}
           AdvText={approwedD2}
-          err_mesg={amountErr}
+          err_mesg1={amountErr1}
+          err_mesg2={amountErr2}
         />
       </>
 
