@@ -45,6 +45,17 @@
   letter-spacing: -0.02em;
 }
 
+.errorMessage {
+  display: block;
+
+  margin-top: 5px;
+  color: red;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+}
+
 .priceWrapper {
   display: flex;
   justify-content: space-between;

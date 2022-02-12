@@ -52,7 +52,7 @@ export const PlanCard: FC<PlanCardProps> = ({
     </div>
     <Button label={submitText} onClick={onSubmit} disabled={loading} />
     {err_mesg ? (
-      <span className={styles.title}>
+      <span className={styles.errorMessage}>
         {err_mesg}
       </span>
     ) : ( null )
