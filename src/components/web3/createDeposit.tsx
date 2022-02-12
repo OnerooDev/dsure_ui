@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Deposit_1, Deposit_2, checkAllowance, Approve} from '../../ethers';
+import { Deposit_1, Deposit_2, checkAllowance, Approve, checkBalance} from '../../ethers';
 import { ethers } from 'ethers';
 import { Dsure_address, price_1, price_2 } from '../../utils/constants';
 import { from_string_to_int, from_hex_to_arr, to_string } from '../../ethers/utils/decode';
 import { PlanCardsGroup } from '../lib/PlanCardsGroup';
-import { useCreateCertMutation } from '../../generated/graphql';
+//import { useCreateCertMutation } from '../../generated/graphql';
 import {useRouter} from 'next/router';
 import { Title } from "../lib/Title";
 
@@ -15,31 +15,41 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
     const [disabled, setDisabled] = useState(false);
     const [approwedD1, setapprowedD1] = useState("");
     const [approwedD2, setapprowedD2] = useState("");
+    const [amountErr, setamountErr] = useState("");
     const { state: stateD1, send: Deposit1, events } = Deposit_1();
     const { state: stateD2, send: Deposit2 } = Deposit_2();
     const allowance = checkAllowance();
+    const balance = checkBalance();
     const { state: allow, send: Allow } = Approve();
     const router = useRouter();
-    const [, new_cert] = useCreateCertMutation();
+    //const [, new_cert] = useCreateCertMutation();
 
     const handleDeposit = (plan: string) => {
       if (plan == "basic") {
-        if (from_string_to_int(allowance) < from_string_to_int(price_1)) {
-          const sum = ethers.BigNumber.from(price_1);
-          setDisabled(true);
-          Allow(Dsure_address, sum);
+        if (from_string_to_int(balance) >= from_string_to_int(price_1)) {
+          if (from_string_to_int(allowance) < from_string_to_int(price_1)) {
+            const sum = ethers.BigNumber.from(price_1);
+            setDisabled(true);
+            Allow(Dsure_address, sum);
+          } else {
+            setDisabled(true);
+            Deposit1();
+          }
         } else {
-          setDisabled(true);
-          Deposit1();
+          setamountErr("Not enough USDT")
         }
       } else {
-        if (from_string_to_int(allowance) < from_string_to_int(price_2)) {
-          const sum = ethers.BigNumber.from(price_2);
-          setDisabled(true);
-          Allow(Dsure_address, sum);
+        if (from_string_to_int(balance) >= from_string_to_int(price_2)) {
+          if (from_string_to_int(allowance) < from_string_to_int(price_2)) {
+            const sum = ethers.BigNumber.from(price_2);
+            setDisabled(true);
+            Allow(Dsure_address, sum);
+          } else {
+            setDisabled(true);
+            Deposit2();
+          }
         } else {
-          setDisabled(true);
-          Deposit2();
+          setamountErr("Not enough USDT")
         }
       }
     }
@@ -89,6 +99,7 @@ export const CreateDepositWeb3: React.FC<CreateDepositProps> = ({}) => {
           loading={disabled}
           BasText={approwedD1}
           AdvText={approwedD2}
+          err_mesg={amountErr}
         />
       </>
 

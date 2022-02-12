@@ -10,6 +10,7 @@ export type PlanCardProps = {
   price: string;
   items: Array<string>;
   variant?: boolean;
+  err_mesg?: string;
   submitText?: string;
   loading: boolean;
   onSubmit: () => void;
@@ -23,6 +24,7 @@ export const PlanCard: FC<PlanCardProps> = ({
   variant,
   loading,
   onSubmit,
+  err_mesg,
 }) => (
   <div className={classnames(styles.container, {
     [styles.variant]: variant,
@@ -49,5 +51,11 @@ export const PlanCard: FC<PlanCardProps> = ({
       </ul>
     </div>
     <Button label={submitText} onClick={onSubmit} disabled={loading} />
+    {err_mesg ? (
+      <span className={styles.title}>
+        {err_mesg}
+      </span>
+    ) : ( null )
+    }
   </div>
 );

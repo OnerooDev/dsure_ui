@@ -25,9 +25,10 @@ export type PlanCardsGroupProps = {
   loading: boolean;
   BasText: string;
   AdvText: string;
+  err_mesg?: string;
 };
 
-export const PlanCardsGroup: FC<PlanCardsGroupProps> = ({ onSubmit, loading, BasText, AdvText }) => (
+export const PlanCardsGroup: FC<PlanCardsGroupProps> = ({ onSubmit, loading, BasText, AdvText, err_mesg }) => (
   <div className={styles.container}>
     <PlanCard
       title="Basic"
@@ -36,6 +37,7 @@ export const PlanCardsGroup: FC<PlanCardsGroupProps> = ({ onSubmit, loading, Bas
       submitText={BasText}
       loading={loading}
       onSubmit={() => onSubmit("basic")}
+      err_mesg={err_mesg}
     />
     <PlanCard
       title="Advanced"
@@ -45,6 +47,7 @@ export const PlanCardsGroup: FC<PlanCardsGroupProps> = ({ onSubmit, loading, Bas
       loading={loading}
       onSubmit={() => onSubmit("advanced")}
       variant
+      err_mesg={err_mesg}
     />
   </div>
 );

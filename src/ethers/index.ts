@@ -74,6 +74,18 @@ export const checkAllowance = () => {
   return al.toString();
 }
 
+export const checkBalance = () => {
+  const { account } = useEthers()
+  const al = useContractCall({
+    abi: token_interface,
+    address: Token_address,
+    method:  'balanceOf',
+    args: [account]
+  }) ?? [];
+
+  return al.toString();
+}
+
 export function Get_vaults (): string {
   const { account } = useEthers()
   const vault = useContractCall({
